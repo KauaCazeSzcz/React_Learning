@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import reactImg from './assets/react-core-concepts.png'
+import { CORE_CONCEPTS } from './data.js';
 
-function App() {
-  const [count, setCount] = useState(0)
+const descripitions = ['Fundamental', 'Crucial', 'Core'];
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+function genRandomInt(Max){
+  return Math.floor(Math.random()*(Max+1));
+}
+
+function Header(){
+  let description = descripitions[genRandomInt(2)];
+  return(
+    <header>
+        <img src={reactImg} alt="Stylized atom" />
+        <h1>React Essentials</h1>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          {description} React concepts you will need for almost any app you are
+          going to build!
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </header>
+  );
+}
+
+function CoreConcenpt({image, title, description}){
+  return(
+    <li>
+      <img src={image} alt={title} />
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </li>
   )
 }
 
-export default App
+function App() {
+  return (
+    <div>
+      <Header/>
+      <main>
+        <section id="core-concepts">
+        <h2>Time to get started!</h2>
+        <ul>
+          <CoreConcenpt {...CORE_CONCEPTS[0]} />
+          <CoreConcenpt {...CORE_CONCEPTS[1]} />
+          <CoreConcenpt {...CORE_CONCEPTS[2]} />
+          <CoreConcenpt {...CORE_CONCEPTS[3]} />
+        </ul>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+export default App;
